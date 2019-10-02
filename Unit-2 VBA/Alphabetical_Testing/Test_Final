@@ -1,0 +1,168 @@
+
+Sub test()
+
+    ' define data type for variables to be used
+    
+    Dim i, j, q As Long
+    Dim lastrow As Long
+    Dim WS As Worksheet
+    Dim change, totalstockvolume, pchange As Double
+    
+    
+    'assign worksheet to a variable
+    
+    'loop for all worksheets
+    
+    For Each WS In Worksheets
+    
+        'calculate last row for the data range
+    
+        lastrow = WS.Range("A" & Rows.Count).End(xlUp).Row
+
+        'assign output column names
+        'WS.Range("i1:l1").Value = Worksheets("A").Range("i1:l1").Value
+        
+            Dim r As Integer
+            Dim a1, a2, a3, f1, f2, f3() As String
+            
+                a3 = "Ticker,YearlyChange,PercentChange,TotalStockVolume"
+                f3 = Split(a3, ",")
+            
+                For r = 0 To 3
+                
+                WS.Cells(1, r + 9).Value = f3(r)
+                
+                Next r
+                
+                a1 = "Greatest %Increase_Greatest %Decrease_Greatest Total Volume"
+                f1 = Split(a1, "_")
+
+                For r = 0 To 2
+
+                WS.Cells(r + 2, 14).Value = f1(r)
+    
+                Next r
+    
+                a2 = "Ticker value"
+                f2 = Split(a2, " ")
+    
+                For r = 0 To 1
+                
+                WS.Cells(1, r + 15).Value = f2(r)
+                
+                Next r
+    
+     
+        'set the row number to display first unique value
+        j = 2
+        
+        q = 2       'will define the row no. of opening value for each stock
+    
+    'run loop for all rows
+    
+        For i = 2 To lastrow
+                
+            'conditional for unique values
+            ' if the value in next cell is not equal to value in current cell then return current cell value
+        
+            If WS.Cells(i, 1).Value <> WS.Cells(i + 1, 1).Value Then
+        
+                'assign cell to get the unique values
+        
+                WS.Cells(j, 9).Value = WS.Cells(i, 1).Value
+         
+                'running total for last row of particular stock
+                totalstockvolume = totalstockvolume + WS.Cells(i, 7).Value
+         
+                'yearly change in  stock value
+                change = WS.Cells(i, 6).Value - WS.Cells(q, 3).Value        'closing value at year end minus the opening value at year beginning
+         
+                'formatting for yearly change
+                            
+                    If change > 0 Then
+                    WS.Cells(j, 10).Interior.Color = RGB(0, 255, 0) 'color as green for positive values
+            
+                    Else: WS.Cells(j, 10).Interior.Color = RGB(255, 0, 0)   'color as red for all other values
+                    End If
+                    
+                WS.Cells(j, 10).NumberFormat = "$#,##0.00"
+            
+                'percent change is change divided by opening value
+                'conditional in case the opening value for stock is "0"
+            
+                    If WS.Cells(q, 3).Value > 0 Then
+                    pchange = change / WS.Cells(q, 3).Value
+                    Else: pchange = 0
+                    End If
+                  
+                'change format as percent for pchange
+                WS.Cells(j, 11).NumberFormat = "0.00%"
+         
+            'output cells for fields
+             WS.Cells(j, 12).Value = totalstockvolume
+             WS.Cells(j, 10).Value = change
+             WS.Cells(j, 11).Value = pchange
+                          
+            'go to next cell to get the cell value when the condition is satisfied the next time
+             j = j + 1
+             q = i + 1
+               
+             totalstockvolume = 0       'reset value for total stock as the stock name/ ticker will change for next iteration
+            
+            Else: totalstockvolume = totalstockvolume + WS.Cells(i, 7).Value     'for the same stock value, running total of stocks volume
+                                                     
+            End If
+        
+      
+        Next i
+    
+    '//Calculate Greatest%increase, Greatest%decrease and Greatest Total stock volume
+    
+        
+        Dim lastrow2 As Long
+        
+        lastrow2 = WS.Range("K" & Rows.Count).End(xlUp).Row
+        
+        Dim rng1, rng2, rng3 As Range
+        Dim F As Object
+        Dim max1, max2, min1 As Double
+    
+        Set F = WS.Application.WorksheetFunction
+        Set rng1 = WS.Range("K2:K" & lastrow2)
+        Set rng2 = WS.Range("L2:L" & lastrow2)
+        Set rng3 = WS.Range("I2:L" & lastrow2)
+    
+        max1 = F.Max(rng1)   'calling MAX function for the given range,
+        max2 = F.Max(rng2)
+        min1 = F.Min(rng1)   'calling MIN function for the given range
+        
+        '// getting the ticker value corresponding to the max and min values
+        
+        For i = 1 To lastrow2
+            For j = 9 To 12
+                
+                If WS.Cells(i, j).Value = max1 Then
+                WS.Range("O2").Value = WS.Cells(i, j - 2).Value
+                
+                ElseIf WS.Cells(i, j).Value = min1 Then
+                WS.Range("O3") = WS.Cells(i, j - 2).Value
+                
+                ElseIf WS.Cells(i, j).Value = max2 Then
+                WS.Range("O4").Value = WS.Cells(i, j - 3).Value
+                
+                End If
+            Next j
+            
+        Next i
+        
+        WS.Range("P2").Value = max1 * 100       'multiply by 100 to get the actual value as pchange value is in %age
+        WS.Range("P4").Value = max2
+        WS.Range("P3").Value = min1 * 100
+    
+            
+    'autofit columns
+    WS.Columns("A:P").AutoFit
+    
+    Next WS
+    
+End Sub
