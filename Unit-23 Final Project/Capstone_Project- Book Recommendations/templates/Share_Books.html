@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Share Books</title>
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Latest compiled and minified BOOTSTRAP JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+
+    <!--Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light " style="padding:0px;">
+      <div class="container-fluid">
+  
+          <a class="navbar-brand" href="/" style="font-size:xx-large;">
+          <img src="../static/img/Logo1.jpg" alt="BookShare">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <!--span class="navbar-brand mb-0 h1"></span-->
+          <span class="navbar-toggler-icon"></span>
+          </button>
+                   
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto" >
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="/bookSearch">Find Books</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/bookShare">Share Books</a>
+                  </li>
+                  <li class="nav-item dropdown" style="font-size:medium;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Library</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/library">Book List</a>
+                        <a class="dropdown-item" href="/visualisations">Books Stats</a>
+                    </div>
+                  </li>
+              </ul>
+          </div>
+      </div> <!--container fluid-->
+    </nav>  <!--Nav bar-->
+  
+    <!--Share Books Form-->
+    <div class="jumbotron">
+      <h1 class="display-4">Share Books</h1>
+      <p class="lead">Share your experience of reading the book! </p>
+      <hr class="my-4">
+      <p></p>
+      <form method="POST" action="/getbooks_share" role="form" name="bookInfo">
+        <div class="form-group">
+          <!-- <label for="inputTitle"><h4 style="color:grey;">Book Title</h4></label> -->
+          <input type="text" class="form-control-lg" id="inputTitle" name="title" placeholder="Enter Title of book to share">
+        </div>
+        <button type="submit" id="share_btn" class="btn btn-primary">Share Book</button>
+        <!-- <button type="button" class="btn btn-primary">Submit
+          <input type="submit" value="Submit" class="btn btn-default">
+        </button> -->
+      </form>
+
+      <!--List down the search results-->
+                         
+      <div class="row">
+        <div class="col-md-12" id="bookResults"> 
+           <div class="col-md-12">
+            <div id="table-area" class="">
+              <table id="get-books" class="table table-striped">
+                <!-- <thead>
+                  <tr>
+                    <th class="table-head">Book_Image</th>
+                    <th class="table-head">Book_ID</th>
+                    <th class="table-head">Book_Title</th>
+                    <th class="table-head">Authors</th>
+                    <th class="table-head">Description</th>
+                    <th class="table-head">ISBN</th>
+                    <th class="table-head">Language</th>
+                    <th class="table-head">Published_Date</th>
+                    <th class="table-head">Publisher</th>
+                  </tr>
+                </thead>
+                <tbody></tbody> -->
+              </table>
+              <!--if no matching results then display a message-->
+              <div id="no-matching-flag"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+      <!-- DIV for book results with JS-->   
+       <!-- <div id='shareList' class="card-deck">
+
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                <img src="." class="card-img" alt="booktitle1">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">Book title1</h3>
+                    <h4 class="card-title">Author</h4>
+                    <h5 class="card-title">Average rating</h5>
+                    <p></p>
+                    <hr class="my-4">           
+                    <a href="/" class="btn btn-primary">Find Book</a>
+                    <a href="/" class="btn btn-primary">Share Book</a>
+                </div>
+                </div>
+            </div>
+        </div> 
+        </div>    -->
+
+
+    </div><!--jumbotron-->
+  
+    <!-- The div that holds our map -->
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <!-- D3 JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+    
+    <!-- Our JavaScript -->
+    <script type="text/javascript" src="../static/js/share.js"></script>
+    <script type="text/javascript" src="../static/js/config.js"></script>
+    <script id="map" type="text/javascript" src="../static/js/map.js"></script> <!--for Map-->
+</body>
+</html>
+

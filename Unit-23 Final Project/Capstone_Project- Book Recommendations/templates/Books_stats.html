@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Books_Stats</title>
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Latest compiled and minified BOOTSTRAP JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+
+    <!--Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light " style="padding:0px;">
+      <div class="container-fluid">
+  
+          <a class="navbar-brand" href="/" style="font-size:xx-large;">
+          <img src="../static/img/Logo1.jpg" alt="BookShare">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <!--span class="navbar-brand mb-0 h1"></span-->
+          <span class="navbar-toggler-icon"></span>
+          </button>
+                   
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto" >
+
+                  <!--
+                  <li class="nav-item active">
+                      <a href="index.html"></a>
+                  </li> -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="/bookSearch">Find Books</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/bookShare">Share Books</a>
+                  </li>
+                  <li class="nav-item dropdown" style="font-size:medium;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Library</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/library">Book List</a>
+                        <a class="dropdown-item" href="/visualisations">Books Stats</a>
+                    </div>
+                  </li>
+              </ul>
+          </div>
+      </div> <!--container fluid-->
+    </nav>  <!--Nav bar-->
+  
+<!-- Div for visualisations-->
+    <div class="jumbotron">
+        <h1 class="display-4">Some Interesting Facts</h1>
+        <p class="lead"> </p>
+        <hr class="my-4">
+        
+        <!--Table for list of available books-->
+        <div class="card mb-3">
+            <img src="static/img/visuals/rating_dist.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Rating Distribution</h5>
+              <p class="card-text">Average rating distribution for all the books is in the range 3.5 to 4.5</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <img src="static/img/visuals/lang2.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Language Distribution</h5>
+              <p class="card-text">From the given graph, we can infer that in the given data, majority of the books are in english languages.</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <img src="static/img/visuals/author_top_books.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Top Rated books by Author</h5>
+              <p class="card-text">Harry Potter and Philosopher's Stone by J.K Rowling has the most number of total rating counts. Also top 3 books with highest total number of rating counts are authored by J.K Rowling .</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <img src="static/img/visuals/rating_textreview.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Average rating VS total number of reviews</h5>
+              <p class="card-text">Majority of the books with average rating in the range 3 to 5 have total review counts less than 20000.</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <img src="static/img/visuals/rating_rating_count.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Average rating and Rating Counts</h5>
+              <p class="card-text">Majority of the books with average rating in the range 3 to 5 have total review counts less than 10000000.</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <img src="static/img/visuals/page_review_count.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Number of Pages VS total number of reviews</h5>
+              <p class="card-text">Lesser number of reviews with higher number of pages, implies people prefer books with less number of pages</p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+          div class="card mb-3">
+            <img src="static/img/visuals/rating_num_pages.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Number of Pages VS Average Rating</h5>
+              <p class="card-text"></p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+          div class="card mb-3">
+            <img src="static/img/visuals/rating_num_pages.jpg" class="card-img-top" alt="visuals">
+            <div class="card-body">
+              <h5 class="card-title">Most Popular books</h5>
+              <p class="card-text"></p>
+              <p class="card-text"><small class="text-muted"></small></p>
+            </div>
+          </div>
+
+
+
+    </div> <!--div jumbotron-->
+  
+    <!-- The div that holds our map -->
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <!-- D3 JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+    
+    <!-- Our JavaScript -->
+    <!-- <script type="text/javascript" src="../static/js/config.js"></script>
+    <script id="map" type="text/javascript" src="../static/js/map.js"></script> --> <!--for Map-->
+</body>
+</html>
